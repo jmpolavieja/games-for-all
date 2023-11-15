@@ -1,0 +1,19 @@
+<h3>Listado de alquileres</h3>
+<div class="card-group" *ngIf="arrayAlquileres.length > 0">
+    <div class="card" *ngFor="let alquiler of arrayAlquileres">
+      <img src="{{alquiler.juego?.imagen}}" class="card-img-top w-100" alt="{{alquiler.juego?.nombre}}">
+      <div class="card-body">
+        <!-- aquí mosrtar un resumen de los datos del alquiler y añadir un botón para editar/devolver/modificar-->
+        <h4 class="card-header">Datos Alquiler</h4>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">Alquilado el {{alquiler.alquiler?.fechaAlquiler}} </li>
+            <li class="list-group-item">Alquilado por {{alquiler.usuario?.nombre}}</li>
+            <li class="list-group-item"><a routerLink="edit-alquiler/alquiler.alquiler.id">Abrir ficha</a></li>
+        </ul>
+      </div>
+      <div class="card-footer">
+        
+      </div>
+    </div>
+    
+  </div>

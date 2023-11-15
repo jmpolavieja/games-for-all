@@ -1,0 +1,27 @@
+<!--  tabla con los juegos, en previsión de añadir paginación -->
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">juegos</th>
+            <th scope="col">Tipo</th>
+            <th scope="col">Precio-Alquiler</th>
+            <th scope="col">Alquilado</th>
+            <th scope="col">Edit/Del</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let juego of listJuegos, let i=index">
+            <th scope="row">{{i+1}}</th>
+            <td>{{juego.nombre}}</td>
+            <td>{{juego.tipo}}</td>
+            <td>{{juego.precio}}</td>
+            <td>{{juego.alquilado}}</td>
+            <td>
+                <i class="bi bi-pencil-square text-success" routerLink="/juegos/edit-juego/{{juego.id}}"></i>
+                
+                <i class="bi bi-trash ps-3 text-danger" (click)="delJuego(juego.id)"></i>
+            </td>
+        </tr>
+    </tbody>
+</table>

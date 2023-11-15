@@ -1,0 +1,77 @@
+<div class="container">
+  <h4>
+    <span [class.d-none]="nuevo">Editar</span>
+    <span [class.d-none]="!nuevo">Creando</span>
+    el Registro del Juego
+  </h4>
+  <!-- <h4 [class.d-none]="!nuevo">Creando el Registro del Juego</h4> -->
+  <form #juegoForm="ngForm" (ngSubmit)="onUpdate(juegoForm)">
+    <input
+      type="text"
+      class="d-none"
+      [(ngModel)]="juego.id"
+      name="id"
+      #idCtrl="ngModel"
+    />
+    <div class="form-group">
+      <label>Nombre del Juego</label>
+      <input
+        class="form-control"
+        name="nombre"
+        #nombreCtrl="ngModel"
+        [(ngModel)]="juego.nombre"
+        placeholder="Nombre del Juego"
+        required
+      />
+    </div>
+
+    <div class="form-group">
+      <label>Tipo</label>
+      <input
+        class="form-control"
+        name="tipo"
+        #tipoCtrl="ngModel"
+        [(ngModel)]="juego.tipo"
+        placeholder="Tipo de Juego"
+        required
+      />
+    </div>
+
+    <div class="form-group">
+      <label>Estado</label>
+      <select
+        class="form-control"
+        name="estadp"
+        #estadoCtrl="ngModel"
+        [(ngModel)]="juego.estado"
+      >
+        <option value="Nuevo">Nuevo</option>
+        <option value="Usado">Usado</option>
+        <option value="Deteriorado">Deteriorado</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>Precio</label>
+      <input
+        class="form-control"
+        name="precio"
+        #precioCtrl="ngModel"
+        (blur)="setPrice(juego, precioCtrl.value)"
+        [(ngModel)]="juego.precio"
+        placeholder="Precio"
+        required
+      />
+    </div>
+
+    <div class="form-group float-right">
+      <button
+        type="submit"
+        class="btn btn-success"
+        [disabled]="!juegoForm.valid"
+      >
+        <i class="bi bi-plus"></i>Actualiza Juego
+      </button>
+    </div>
+  </form>
+</div>

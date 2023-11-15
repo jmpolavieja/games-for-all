@@ -1,0 +1,63 @@
+<!-- mostrar un card con los datos del usuario -->
+<h4 [class.d-none]="nuevo">Editar el Registro del Usuario</h4>
+  <h4 [class.d-none]="!nuevo">Creando el Registro del Usuario</h4>
+<form class="row g-3" #userForm="ngForm" (ngSubmit)="onSubmit()">
+    <input class="d-none" [(ngModel)]="user.id" name="id" #idCtrl="ngModel">
+    <div class="col-md-6">
+      <label for="inputNombre" class="form-label">Nombre</label>
+      <input type="text" class="form-control" id="inputNombre"
+        name="nombre" #nombreCtrl="ngModel" [(ngModel)]="user.nombre" required>
+    </div>
+    <div class="col-md-6">
+      <label for="inputDNI" class="form-label">DNI</label>
+      <input type="text" class="form-control" id="inputDNI"
+        name="dni" #dniCtrl="ngModel" [(ngModel)]="user.dni" required>
+    </div>
+    <div class="col-6">
+      <label for="inputDireccion" class="form-label">Dirección</label>
+      <input type="text" class="form-control" id="inputDireccion"
+      name="direccion" #direccionCtrl="ngModel" [(ngModel)]="user.direccion" required
+      placeholder="c/Principal 123, Sevilla 41001">
+    </div>
+    <div class="col-md-6">
+      <label for="inputemail" class="form-label">Email</label>
+      <input type="text" class="form-control" id="inputemail"
+        name="email" #emailCtrl="ngModel" [(ngModel)]="user.email" required>
+    </div>
+    <div class="col-6">
+      <label for="inputTelefono" class="form-label">Telefono</label>
+      <input type="text" class="form-control" id="inputTelefono" placeholder="955000000"
+      name="telefono" #telefonoCtrl="ngModel" [(ngModel)]="user.telefono" required>
+    </div>
+    <div class="col-md-6">
+      <label for="inputCity" class="form-label">Ciudad</label>
+      <input type="text" class="form-control" id="inputCity"
+      name="ciudad" #ciudadCtrl="ngModel" [(ngModel)]="user.ciudad" required>
+    </div>
+    <div class="col-md-4">
+      <label for="inputState" class="form-label">Provincia</label>
+      <select id="inputState" class="form-select"
+      name="provincia" #provinciaCtrl="ngModel" [(ngModel)]="user.provincia" required>
+        <option selected>Elige...</option>
+        <option value="Sevilla">Sevilla</option>
+        <option value="Huelva">Huelva</option>
+        <option value="Córdoba">Córdoba</option>
+        <option value="Cádiz">Cádiz</option>
+      </select>
+    </div>
+    <div class="col-md-2">
+      <label for="inputCP" class="form-label">C.P.</label>
+      <input type="text" class="form-control" id="inputCP"
+      name="cp" #cpCtrl="ngModel" [(ngModel)]="user.cp" required>
+    </div>
+    <div class="clear"></div>
+    <div class="col-6">
+      <button type="submit" class="btn btn-primary"
+      [disabled]="!userForm.valid">
+      <span [class.d-none]="!nuevo">Register</span>
+      <span [class.d-none]="nuevo">Actualiza</span></button>
+    </div>
+    <div class="col-6">
+      <button class="btn btn-success" (click)="goBack()">go back</button>
+    </div>
+  </form>

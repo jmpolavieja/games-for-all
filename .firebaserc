@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "ejercicio-csi2-2022": {
+      "hosting": {
+        "games-for-all": [
+          "gamesforall"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "ejercicio-csi2-2022"
+  }
+}

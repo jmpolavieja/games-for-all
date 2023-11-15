@@ -1,0 +1,89 @@
+<div class="container">
+  <h4 [class.d-none]="nuevo">Ficha del Alquiler</h4>
+  <h4 [class.d-none]="!nuevo">Nuevo Alquiler</h4>
+  <form #alquilerForm="ngForm" (ngSubmit)="saveAlquiler()">
+    <input
+      type="text"
+      class="d-none"
+      (value)="alquiler.id"
+      name="id"
+    />
+    <div class="form-group">
+      <label>Fecha del alquiler</label>
+      <input
+        type="date"
+        class="form-control"
+        name="fechaAlquiler"
+        #faCtrl="ngModel"
+        [(ngModel)]="alquiler.fechaAlquiler"
+        placeholder="fecha del alquiler (dd/mm/aaaa)"
+        required
+      />
+    </div>
+
+    <div class="form-group">
+      <label>Devolución:</label>
+      <input
+        type="date"
+        class="form-control"
+        name="fechaDevolucion"
+        #fdCtrl="ngModel"
+        [(ngModel)]="alquiler.fechaDevolucion"
+        placeholder="fecha devolución (dd/mm/aaaa)"
+      />
+    </div>
+
+    <div class="form-group">
+      <label>Usuario</label>
+      <select
+        class="form-select"
+        name="usuario"
+        #estadoCtrl="ngModel"
+        [(ngModel)]="alquiler.idUsuario"
+      >
+        <option value="{{usuario.id}}" *ngFor="let usuario of usuarios">
+        {{usuario.nombre}}
+        </option>
+        
+      </select>
+    </div>
+
+    <div class="form-group">
+        <label>Juego</label>
+        <select
+          class="form-select"
+          name="estadp"
+          #estadoCtrl="ngModel"
+          [(ngModel)]="alquiler.idJuego"
+        >
+          <option value="{{juego.id}}" *ngFor="let juego of juegos">
+          {{juego.nombre}}
+          </option>
+          
+        </select>
+      </div>
+
+    <!-- <div class="form-group">
+      <label>Precio</label>
+      <input
+        class="form-control"
+        name="precio"
+        #precioCtrl="ngModel"
+        (blur)="setPrice(alquiler, precioCtrl.value)"
+        [(ngModel)]="alquiler.precio"
+        placeholder="Precio"
+        required
+      />
+    </div> -->
+
+    <div class="form-group float-right">
+      <button
+        type="submit"
+        class="btn btn-success"
+        [disabled]="!alquilerForm.valid"
+      >
+        <i class="bi bi-plus"></i>Actualiza alquiler
+      </button>
+    </div>
+  </form>
+</div>
