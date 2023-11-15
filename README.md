@@ -6,22 +6,21 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
-## Code scaffolding
+## Refactorizar nuestro código para modularizarlo y añadir lazy loading (carga perezosa)
+1. Lo primero que hay que tener en cuenta es cuáles son las funcionalidades de la aplicación. En el caso del ejemplo de "Games for all" o ludoteca, he creado intencionalmente cada función de la app en carpetas separadas: usuarios, juegos y alquileres.
+2. Una vez aclarado esto, vamos a crear un módulo (con su módulo de routing) para cada funcionalidad, siendo el comando tal que así:
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+	ng g m vistas/usuarios/usuarios --flat --routing
+Se le indica la ruta y el nombre del módulo, las banderas son --flat para que no cree los módulos en una carpeta nueva y --routing para que cree el módulo de enrutamiento asociado directamente al módulo (en este caso usuarios).
+Esto crea dos archivos:
 
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+	usuarios.module.ts
+	usuarios-routing.module.ts
+3. Refactorizando las rutas.
+* En el app-routing cortamos el bloque de rutas de usuarios y lo copiamos en usuasios-routing, dejando el primer path vacío ( "" ).
+* En el app-routing añadimos en lugar del bloque que hemos quitado el siguiente:
+	{path: 'usuarios', loadchildren: () => import('./vistas/usuarios/usuarios.module').then(m => m.usuarios.module)},
+4. Refactorizando las declaraciones de los componentes.
+Los componentes dentro de usuarios (usuarios.component, listadoUsuarios.component, DetalleUsuario.component) se eliminan del array declarations de app.module y se declaran en usuarios.module (ponerlos en el array declarations e importarlos)
+Eliminamos las importaciones que no se usan en app.module.
+5. Refactorizando módulos. En caso necesario, hay módulos (como FormsModule) que tendremos que importar en el nuevo módulo (array imports)
